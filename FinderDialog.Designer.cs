@@ -49,6 +49,8 @@
             this.m_vaultBrowseControl = new Autodesk.DataManagement.Client.Framework.Vault.Forms.Controls.VaultBrowserControl();
             this.m_saveSettingsButton = new System.Windows.Forms.Button();
             this.m_loadSettingsButton = new System.Windows.Forms.Button();
+            this.m_valueComboBox = new System.Windows.Forms.ComboBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -153,7 +155,7 @@
             // 
             this.m_valueTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.m_valueTextBox.Location = new System.Drawing.Point(409, 54);
+            this.m_valueTextBox.Location = new System.Drawing.Point(409, 52);
             this.m_valueTextBox.Name = "m_valueTextBox";
             this.m_valueTextBox.Size = new System.Drawing.Size(202, 20);
             this.m_valueTextBox.TabIndex = 11;
@@ -242,11 +244,33 @@
             this.m_loadSettingsButton.UseVisualStyleBackColor = true;
             this.m_loadSettingsButton.Click += new System.EventHandler(this.m_loadSettingsButton_Click);
             // 
+            // m_valueComboBox
+            // 
+            this.m_valueComboBox.FormattingEnabled = true;
+            this.m_valueComboBox.Location = new System.Drawing.Point(230, 78);
+            this.m_valueComboBox.Name = "m_valueComboBox";
+            this.m_valueComboBox.Size = new System.Drawing.Size(202, 21);
+            this.m_valueComboBox.TabIndex = 21;
+            this.m_valueComboBox.SelectedIndexChanged += new System.EventHandler(this.m_valueComboBox_SelectedIndexChanged);
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(28, 80);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(199, 17);
+            this.checkBox1.TabIndex = 22;
+            this.checkBox1.Text = "use Vault Property for search criteria:";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
             // FinderDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(722, 412);
+            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.m_valueComboBox);
             this.Controls.Add(this.m_loadSettingsButton);
             this.Controls.Add(this.m_saveSettingsButton);
             this.Controls.Add(this.m_vaultBrowseControl);
@@ -298,5 +322,7 @@
         private Autodesk.DataManagement.Client.Framework.Vault.Forms.Controls.VaultBrowserControl m_vaultBrowseControl;
         private System.Windows.Forms.Button m_saveSettingsButton;
         private System.Windows.Forms.Button m_loadSettingsButton;
+        private System.Windows.Forms.ComboBox m_valueComboBox;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }

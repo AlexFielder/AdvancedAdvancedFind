@@ -12,18 +12,13 @@ PARTICULAR PURPOSE.
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 using Autodesk.Connectivity.WebServices;
-using Autodesk.Connectivity.WebServicesTools;
 using Autodesk.DataManagement.Client.Framework.Vault.Currency.Connections;
 using VDF = Autodesk.DataManagement.Client.Framework;
-
 
 namespace AdvancedAdvancedFind
 {
@@ -43,9 +38,10 @@ namespace AdvancedAdvancedFind
 
             m_isVaultPro = isVaultPro;
             m_conn = conn;
-
+            checkBox1.Checked = false;
             InitializeEnitityClassComboBox();
-            InitializePropertyComboBox();
+            InitializePropertyComboBox(m_propertyComboBox);
+            InitializePropertyComboBox(m_valueComboBox);
             InitializeConditionComboBox();
             InitializeRulesComboBox();
             InitializeGrid();
@@ -104,14 +100,14 @@ namespace AdvancedAdvancedFind
         /// <summary>
         /// Intializes the combox box containing the searchable properties available.
         /// </summary>
-        private void InitializePropertyComboBox()
+        private void InitializePropertyComboBox(ComboBox thisBox)
         {
-            m_propertyComboBox.SelectedItem = null;
+            thisBox.SelectedItem = null;
 
             EntityClass entityClass = m_entityClassComboBox.SelectedItem as EntityClass;
             if (entityClass == null)
             {
-                m_propertyComboBox.Items.Clear();
+                thisBox.Items.Clear();
                 return;
             }
 
@@ -121,20 +117,20 @@ namespace AdvancedAdvancedFind
             if (defs != null && defs.Length > 0)
             {
                 //wait to draw the combo box until we've added all of the properties
-                m_propertyComboBox.BeginUpdate();
+                thisBox.BeginUpdate();
 
-                m_propertyComboBox.Items.Clear();
+                thisBox.Items.Clear();
 
                 foreach (PropDef def in defs.OrderBy(n => n.DispName))
                 {
                     //create a list item type that will hold the property
                     PropDefItem item = new PropDefItem(def);
 
-                    m_propertyComboBox.Items.Add(item);
+                    thisBox.Items.Add(item);
                 }
 
                 //indicate that we've finished updated the combobox and it can now be re-drawn
-                m_propertyComboBox.EndUpdate();
+                thisBox.EndUpdate();
             }
         }
 
@@ -232,7 +228,16 @@ namespace AdvancedAdvancedFind
             searchCondition.PropDefId = property.Id;
             searchCondition.PropTyp = PropertySearchType.SingleProperty;
             searchCondition.SrchOper = condition.Code;
-            searchCondition.SrchTxt = m_valueTextBox.Text;
+            if(checkBox1.Checked)
+            {
+                //here we would effectively need to perform a search for everything and then search those results.
+                searchCondition.SrchTxt = m_valueComboBox.SelectedItem.ToString();
+            }
+            else
+            {
+                searchCondition.SrchTxt = m_valueTextBox.Text;
+            }
+            
             searchCondition.SrchRule = rule;
 
 
@@ -447,7 +452,8 @@ namespace AdvancedAdvancedFind
 
         private void m_entityClassComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            InitializePropertyComboBox();
+            InitializePropertyComboBox(m_propertyComboBox);
+            InitializePropertyComboBox(m_valueComboBox);
             InitializeConditionComboBox();
 
             m_criteriaListBox.Items.Clear();
@@ -550,6 +556,26 @@ namespace AdvancedAdvancedFind
 
                 m_criteriaListBox.Items.Clear();
                 m_criteriaListBox.Items.AddRange(search.Conditions.ToArray());
+            }
+        }
+
+        private void m_valueComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            InitializeConditionComboBox();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if(checkBox1.Checked)
+            {
+                m_valueComboBox.Enabled = true;
+                m_valueTextBox.Enabled = false;
+                //m_valueComboBox.
+            }
+            else
+            {
+                m_valueComboBox.Enabled = false;
+                m_valueTextBox.Enabled = true;
             }
         }
     }

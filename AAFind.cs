@@ -23,7 +23,7 @@ using Autodesk.Connectivity.WebServicesTools;
 using Autodesk.DataManagement.Client.Framework.Vault.Currency.Connections;
 using VDF = Autodesk.DataManagement.Client.Framework;
 
-[assembly: ApiVersion("6.0")]
+[assembly: ApiVersion("10.0")]
 [assembly: ExtensionId("68A25047-183E-47E5-A123-3344BD9A9D0F")]
 
 namespace AdvancedAdvancedFind
