@@ -8,7 +8,7 @@ A find dialog that allows OR based searches.
 
 REQUIREMENTS:
 ---------------------------------
-- Vault Workgroup/Professional 2014 
+- Vault Workgroup/Professional 2017 
 
 
 TO USE:
@@ -34,6 +34,7 @@ NOTES:
 
 RELEASE NOTES:
 ---------------------------------
+5.0.1.0 - Update for Vault 2017.  Corrected references to 2017 versions and upgraded .NET version to 4.6
 
 4.0.1.0 - Update for Vault 2014.  Added Save and Load buttons.  Results display in a Vault Grid control.  Double-clicking on a result navigates Vault Explorer to that object.
 
